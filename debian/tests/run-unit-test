@@ -1,0 +1,8 @@
+cel-server > portnum&
+port=$(cat portnum| awk '{printf $3}')
+echo "PORT: $port"
+netstat -ntap > netstat.log
+cat netstat.log
+fgrep -q "${port}" netstat.log
+pkill cel-serve
+rm -f netstat.log portnum
