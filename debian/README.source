@@ -1,0 +1,9 @@
+This version ships a vendored copy of
+
+- google.golang.org/genproto
+
+It was copied from the upstream vendor/ directory to make sure to pick the
+version of the code that upstream is using as well
+
+See this thread for the reasoning:
+https://lists.debian.org/debian-go/2022/11/msg00068.html

@@ -1,15 +1,43 @@
-Source: template-repository
-Section: unknown
+Source: golang-github-google-cel-go
+Maintainer: Debian Go Packaging Team <team+pkg-go@tracker.debian.org>
+Uploaders: Peymaneh <peymaneh@posteo.net>
+Section: golang
+Testsuite: autopkgtest-pkg-go
 Priority: optional
-Maintainer: Tsic404 <liuheng@deepin.org>
-Build-Depends: debhelper (>= 11)
-Standards-Version: 4.1.3
-Homepage: https://github.com/deepin-community/template-repository
-#Vcs-Browser: https://salsa.debian.org/debian/deepin-community-template-repository
-#Vcs-Git: https://salsa.debian.org/debian/deepin-community-template-repository.git
+Build-Depends: debhelper-compat (= 13),
+               dh-golang,
+               golang-any,
+               golang-github-antlr-antlr4-dev (>=4.11.1~),
+               golang-github-golang-protobuf-1-5-dev,
+               golang-github-stoewer-go-strcase-dev,
+               golang-golang-x-text-dev,
+               golang-google-genproto-dev (>= 0.0~git20210726.e7812ac~),
+               tzdata
+Standards-Version: 4.7.0
+Vcs-Browser: https://salsa.debian.org/go-team/packages/golang-github-google-cel-go
+Vcs-Git: https://salsa.debian.org/go-team/packages/golang-github-google-cel-go.git
+Homepage: https://github.com/google/cel-go
+Rules-Requires-Root: no
+XS-Go-Import-Path: github.com/google/cel-go
 
-Package: template-repository
-Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}
-Description: <insert up to 60 chars description>
- <insert long description, indented with spaces>
+Package: golang-github-google-cel-go-dev
+Architecture: all
+Multi-Arch: foreign
+Depends: golang-github-antlr-antlr4-dev (>=4.11.1~),
+         golang-github-golang-protobuf-1-5-dev,
+         golang-github-stoewer-go-strcase-dev,
+         golang-golang-x-text-dev,
+         golang-google-genproto-dev (>= 0.0~git20210726.e7812ac~),
+         ${misc:Depends}
+Breaks: golang-google-grpc-dev (<< 1.64.0-5)
+Description: Common Expression Language (go runtime)
+ The Common Expression Language (CEL) is a simple expression language built on
+ top of protocol buffer types. It implements common semantics for
+ expression evaluation, enabling different applications to more easily
+ interoperate.
+ .
+ This package provides tools for parsing CEL expressions and type-checking and
+ evaluating parsed expressions. It also implements a gRPC conformance test
+ server for CEL in go.
+ .
+ Disclaimer: This is not an official Google product

@@ -1,4 +1,18 @@
 #!/usr/bin/make -f
 
+#export DH_VERBOSE := 1
+export DH_GOLANG_EXCLUDES := server examples codelab repl/appengine/main repl/main
+export BUILDDIR := build
+
 %:
-	dh $@
+	dh $@ --builddirectory=$(BUILDDIR) --buildsystem=golang --with=golang
+
+override_dh_auto_configure:
+	mkdir -p -v $(BUILDDIR)/src/github.com/google/cel-go/vendor
+	cp -v -a debian/missing-sources/* $(BUILDDIR)/src/github.com/google/cel-go/vendor
+	dh_auto_configure
+
+override_dh_install:
+	find debian/golang-github-google-cel-go-dev/usr/share/gocode/src/github.com/google/cel-go/ \
+	    -type f -exec chmod -x \{\} \;
+	dh_install -i
